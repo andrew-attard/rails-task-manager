@@ -38,6 +38,27 @@ class TasksController < ApplicationController
     end
   end
 
+  def edit
+    # Find/load the task we want to edit, based on its :id, this method will return
+    # a task instance
+    # ie. 'tasks/1/edit'
+    @task = Task.find(params[:id])
+  end
+
+  def update
+    # Load the @task instance we want to update
+    @task = Task.find(params[:id])
+    # Update the instance, again with the FILTERED params, not RAW
+    if @task.update(task_params)
+      # If the task is successfully updated, then redirect to the updated
+      # instances's task path, defined in the router as
+      # get '/task/:id', to: 'tasks#show', as: :task
+      redirect_to task_path(@task)
+    else
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   # To prevent potentially malicious insert into the DB, we should filter permissable
   # inputs, where 'params' contains the attributes (hash) required for creating a
   # new @task instance
