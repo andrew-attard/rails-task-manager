@@ -1,0 +1,25 @@
+<%# * Creates a form using the task model that we defined (:title, :details: completed)
+* The keys we define below should match to our defined model
+* t.label shows the input labels while t.text_field defines the inputs (and I
+  assume other input types such as drop-down, radio buttons, etc. are also available)
+* (The classes defined below are bootstrap classes for form styling)
+* Since this is a form, rails assumes that a POST request will be made and knows
+  to send the POST request to the create method as only one REST method is defined
+  per route
+  ----
+  get '/tasks/new', to: 'tasks#new', as: :new_task
+  post '/tasks', to: 'tasks#create'
+* @task do |t| ? %>
+<%= form_with model: @task do |t| %>
+  <%= t.label :title %>
+  <%= t.text_field :title, class: 'form-control' %>
+  <%= t.label :details %>
+  <%= t.text_field :details, class: 'form-control' %>
+  <%= t.submit class: 'btn btn-primary mt-2' %>
+<% end %>
+
+<!-- Form builder will: -->
+<!-- add the action (/restaurants) -->
+<!-- add the method (post) -->
+<!-- adds the authenticity token -->
+<!-- grouping all of our attributes inside of one hash -->

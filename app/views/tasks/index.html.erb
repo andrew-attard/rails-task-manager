@@ -1,0 +1,5 @@
+<% @tasks.each do |task| %>
+<%= link_to task.title, task_path(task), class: 'text-decoration-none text-dark' %>
+<% end %>
+
+<%= link_to 'Add a New Task', new_task_path %>
